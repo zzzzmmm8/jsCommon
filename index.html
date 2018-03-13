@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        //回文函数
+        window.onload = function () {
+            function checkPalindrom(str) {
+                return str == str.split('').reverse().join('');
+            }
+
+            console.log(checkPalindrom('mamam'))
+
+            //数组去重
+            let unique = function (arr) {
+                let hashTable = {};
+                let data = [];
+                for (let i = 0, l = arr.length; i &lt; l; i++) {
+                    if (!hashTable[arr[i]]) {
+                        hashTable[arr[i]] = true;
+                        data.push(arr[i]);
+                    }
+                }
+                return data
+            }
+            console.log(unique([3, 4, 3, 2, 4, 3]));
+
+            //字符串出现最多次数的字符
+            function findMaxDuplicateChar(str) {
+                if (str.length == 1) {
+                    return str;
+                }
+                let charObj = {};
+                for (let i = 0; i < str.length; i++) {
+                    if (!charObj[str.charAt(i)]) {
+                        charObj[str.charAt(i)] = 1;
+                    } else {
+                        charObj[str.charAt(i)] += 1;
+                    }
+                }
+                let maxChar = '',
+                    maxValue = 1;
+                for (var k in charObj) {
+                    if (charObj[k] >= maxValue) {
+                        maxChar = k;
+                        maxValue = charObj[k];
+                    }
+                }
+                return maxChar;
+            }
+
+            console.log(findMaxDuplicateChar('afjghdfraaaasdenas'))
+
+            //冒泡排序
+            function bubbleSort(arr) {
+                for (var i = 0, l = arr.length; i &lt; l - 1; i++) {
+                    for (var j = i + 1; j < l; j++) {
+                        if (arr[i] > arr[j]) {
+                            var tem = arr[j];
+                            arr[j] = arr[i];
+                            arr[i] = tem;
+                        }
+                    }
+                }
+                return arr;
+            }
+
+            console.log(bubbleSort([3, 4, 5, 2, 3, 4, 4, 6766, 6]));
+
+
+            var examplearr=[8,94,15,88,55,76,21,39];
+            function sortarr(arr){
+                for(i=0;i<arr.length-1;i++){
+                    for(j=0;j<arr.length-1-i;j++){
+                        if(arr[j]>arr[j+1]){
+                            var temp=arr[j];
+                            arr[j]=arr[j+1];
+                            arr[j+1]=temp;
+                        }
+                    }
+                }
+                return arr;
+            }
+            sortarr(examplearr);
+            console.log(examplearr);
+
+
+            //快速排序
+            function quickSort(arr) {
+                if (arr.length <= 1) {
+                    return arr;
+                }
+                let leftArr = [], rightArr = [], q = arr[0];
+                for (var i = 1, l = arr.length; i &lt; l; i++) {
+                    if (arr[i] > q) {
+                        rightArr.push(arr[i]);
+                    } else {
+                        leftArr.push(arr[i]);
+                    }
+                }
+                return [].concat(quickSort(leftArr), [q], quickSort(rightArr));
+            }
+
+            console.log(quickSort([3, 4, 5, 2, 3, 4, 4, 6766, 6]));
+
+            //不借助临时变量，进行两个整数的交换
+            function swap(a, b) {
+                b = b - a;
+                a = a + b;
+                b = a - b;
+                return [a, b];
+            }
+
+            console.log(swap(4, 8));
+
+            //找出下列正数组的最大差值比如:
+            function getMaxProfit(arr) {
+                var minPrice = arr[0], maxProfit = 0;
+                for (var i = 0, l = arr.length; i &lt; l; i++) {
+                    var currentPrice = arr[i];
+                    minPrice = Math.min(minPrice, currentPrice);
+                    var potentialProfit = currentPrice - minPrice;
+                    maxProfit = Math.max(maxProfit, potentialProfit);
+                }
+                return maxProfit;
+            }
+
+            console.log(getMaxProfit([3, 4, 5, 2, 3, 4, 4, 6766, 6]));
+
+            //随机生成指定长度的字符串
+            function randomString(n) {
+                let str = 'abcdefghijklmnopqrstuvwxyz9876543210';
+                let tmp = '', l = str.length;
+                for (var i = 0; i < n; i++) {
+                    tmp = tmp + str.charAt(Math.floor(Math.random() * l));
+                }
+                return tmp;
+            }
+
+            console.log(randomString(3));
+
+            //二分查找算法
+            function binarrySearch(arry, start, stop, num) {
+                if (stop - start == 1) {
+                    if (arry[stop] == num) {
+                        return stop;
+                    }
+                    if (arry[start] == num) {
+                        return start;
+                    }
+                    return -1;
+                }
+                var center = Math.floor((stop + start) / 2);
+                if (arry[center] != num) {
+                    return num > arry[center] ? binarrySearch(arry, center, stop, num) : binarrySearch(arry, start, center, num);
+                }
+                return center;
+            }
+
+            var arry = [1, 3, 4, 6, 8, 9]
+            console.log(binarrySearch(arry, 0, arry.length, 9));
+
+            //闭包获取节点
+            var list = document.querySelectorAll('#test li');
+            for (var i = 0, l = list.length; i &lt; l; i++) {
+                list[i].onclick = (function (num) {
+                    return function () {
+                        console.log(num)
+                    }
+                })(i)
+            }
+        }
+
+    </script>
+</head>
+<body>
+<ul id="test">
+    <li>第一</li>
+    <li>第二</li>
+    <li>第三</li>
+</ul>
+
+</body>
+</html>
